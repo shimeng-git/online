@@ -8,7 +8,27 @@
 #include<queue>
 using namespace std;
 
-int main()
+//int main()
+//{
+//    int n;
+//    cin >> n;
+//    string str;
+//    cin >> str;
+//
+//    string temp(str);
+//    const int N
+//    for (int i = 0; i < )
+//
+//    return 0;
+//}
+
+
+
+/**
+ * 美团第一题
+ * @return
+ */
+int first()
 {
     int n, k;
     cin >> n >> k;
@@ -21,13 +41,13 @@ int main()
         }
     }
 
-    double value = 0;
     double min_value = 1e10;
     int res = 0;
     for (int i = 0; i < n; ++i) {
+        double value = 0;
         if (record.find(i) == record.end() && arr[i] <= k) {
             for (int it : record) {
-                value += (it - i);
+                value += abs(it - i);
             }
             value = abs(value);
             if (value < min_value) {
