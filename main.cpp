@@ -39,22 +39,24 @@ int main()
     int res = 0;
     for (int d : limit) {
         auto f = upper_bound(first.begin(), first.end(), d);
-        int first_cnt = 0;
-        if (f == first.begin()) {
-            first_cnt = 2 * n;
-        } else {
-            first_cnt = f - first.begin();
-            first_cnt += n;
-        }
+        int first_cnt = (first.end() - f + 1);
+        first_cnt += n;
+//        if (f == first.begin()) {
+//            first_cnt = 2 * n;
+//        } else {
+//            first_cnt =first.end() - f + 1;
+//            first_cnt += n;
+//        }
 
         auto s = upper_bound(second.begin(), second.end(), d);
-        int second_cnt = 0;
-        if (s == second.begin()) {
-            second_cnt = 2 * n;
-        } else {
-            second_cnt = s - second.begin();
-            second_cnt += n;
-        }
+        int second_cnt = (second.end() - s + 1);
+        second_cnt += m;
+//        if (s == second.begin()) {
+//            second_cnt = 2 * n;
+//        } else {
+//            second_cnt = second.end() - s + 1;
+//            second_cnt += n;
+//        }
         int score = abs(first_cnt - second_cnt);
 
         if (score > res) {
