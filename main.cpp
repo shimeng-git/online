@@ -44,12 +44,16 @@ int main()
             int cnt = get_cnt(temp[i], temp[i+1], temp[i+2], ch);
             if (cnt == 3) {
                 temp[i] = 'x';
-                temp[i+1] = 'x';
-                temp[i+2] = 'x';
-            } else if (cnt == 2) {
+                temp[i + 1] = 'x';
+                temp[i + 2] = 'x';
+            }
+        }
+        for (int i = 0; i < n-2; ++i) {
+            int cnt = get_cnt(temp[i], temp[i+1], temp[i+2], ch);
+            if (cnt == 2) {
                 temp[i] = 'x';
-                temp[i+1] = 'x';
-                temp[i+2] = 'x';
+                temp[i + 1] = 'x';
+                temp[i + 2] = 'x';
             }
         }
 
