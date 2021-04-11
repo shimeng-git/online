@@ -6,69 +6,98 @@
 #include<string>
 #include<stack>
 #include<queue>
+#include <sstream>
 using namespace std;
+
+
+
+int main()
+{
+    set<int> data;
+    string temp;
+    bool flag = false;
+    int target = 0;
+    while (cin >> temp) {
+        if (flag) {
+            target = stoi(temp);
+            break;
+        }
+
+        if (temp != "#") {
+            data.insert(stoi(temp));
+        } else {
+            flag = true;
+        }
+    }
+
+    set<pair<int, int>> res;
+    for (int item : data) {
+        if (data.find(target - item) != data.end()) {
+            res.insert({min(item, target - item), max(item, target-item)});
+        }
+    }
+
+    if (res.empty()) {
+        cout << "NULL" << endl;
+    } else {
+        cout << "(" << res.begin()->first << "," << res.begin()->second << ")";
+        for (auto it = ++res.begin(); it != res.end(); ++it) {
+            cout << ",(" << it->first << "," << it->second << ")";
+        }
+    }
+
+    return 0;
+}
 
 
 //2 3
 //585 375
 //936 317 185
-int main()
-{
-    int n, m;
-    cin >> n >> m;
-    vector<int> first(n);
-    vector<int> second(m);
-
-    for (int i = 0; i < n; ++i) {
-        cin >> first[i];
-    }
-
-    for (int i = 0; i < m; ++i) {
-        cin >> second[i];
-    }
-
-    sort(first.begin(), first.end());
-    sort(second.begin(), second.end());
-    set<int> limit;
-    for (int item : second) {
-        limit.insert(item - 1);
-        limit.insert(item);
-        limit.insert(item + 1);
-    }
-
-    int res = 0;
-    for (int d : limit) {
-        auto f = upper_bound(first.begin(), first.end(), d);
-        int first_cnt = (first.end() - f + 1);
-        first_cnt += n;
-//        if (f == first.begin()) {
-//            first_cnt = 2 * n;
-//        } else {
-//            first_cnt =first.end() - f + 1;
-//            first_cnt += n;
+//int main()
+//{
+//    int n, m;
+//    cin >> n >> m;
+//    vector<int> first(n);
+//    vector<int> second(m);
+//
+//    for (int i = 0; i < n; ++i) {
+//        cin >> first[i];
+//    }
+//
+//    for (int i = 0; i < m; ++i) {
+//        cin >> second[i];
+//    }
+//
+//    sort(first.begin(), first.end());
+//    sort(second.begin(), second.end());
+//    set<int> limit;
+//    for (int item : second) {
+//        limit.insert(item - 1);
+//        limit.insert(item);
+//        limit.insert(item + 1);
+//    }
+//
+//    int res = 0;
+//    for (int d : limit) {
+//        auto f = upper_bound(first.begin(), first.end(), d);
+//        int first_cnt = (first.end() - f);
+//        first_cnt += n;
+//
+//        auto s = upper_bound(second.begin(), second.end(), d);
+//        int second_cnt = (second.end() - s);
+//        second_cnt += m;
+//
+//        int score = abs(first_cnt - second_cnt);
+//
+//        if (score > res) {
+//            res = score;
 //        }
-
-        auto s = upper_bound(second.begin(), second.end(), d);
-        int second_cnt = (second.end() - s + 1);
-        second_cnt += m;
-//        if (s == second.begin()) {
-//            second_cnt = 2 * n;
-//        } else {
-//            second_cnt = second.end() - s + 1;
-//            second_cnt += n;
-//        }
-        int score = abs(first_cnt - second_cnt);
-
-        if (score > res) {
-            res = score;
-        }
-    }
-
-    cout << res << endl;
-
-
-    return 0;
-}
+//    }
+//
+//    cout << res << endl;
+//
+//    return 0;
+//}
 
 
 
