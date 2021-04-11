@@ -8,19 +8,61 @@
 #include<queue>
 using namespace std;
 
-//int main()
-//{
-//    int n;
-//    cin >> n;
-//    string str;
-//    cin >> str;
-//
-//    string temp(str);
-//    const int N
-//    for (int i = 0; i < )
-//
-//    return 0;
-//}
+int get_cnt(char a, char b, char c, char target) {
+    int cnt = 0;
+    if (a == 'x' || b == 'x' || c == 'x') {
+        return cnt;
+    }
+
+    if (a == target) {
+        cnt += 1;
+    }
+    if (b == target) {
+        cnt += 1;
+    }
+    if (c == target) {
+        cnt += 1;
+    }
+    return cnt;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    string str;
+    cin >> str;
+
+    vector<char> op {'0', '1'};
+    int res = 0;
+    for (char ch : op) {
+        int one = 0;
+        int zero = 0;
+        string temp(str);
+
+        for (int i = 0; i < n-2; ++i) {
+            int cnt = get_cnt(temp[i], temp[i+1], temp[i+2], ch);
+            if (cnt >= 2) {
+                temp[i] = 'x';
+                temp[i+1] = 'x';
+                temp[i+2] = 'x';
+            }
+        }
+
+        for (char item : temp) {
+            one += (item == '1');
+            zero += (item == '0');
+        }
+
+        if (abs(one - zero) > res) {
+            res = abs(one - zero);
+        }
+    }
+
+    cout << res << endl;
+
+    return 0;
+}
 
 
 
