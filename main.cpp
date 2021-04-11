@@ -8,6 +8,47 @@
 #include<queue>
 using namespace std;
 
+int main()
+{
+    int n;
+    cin >> n;
+    string str;
+    cin >> str;
+
+    set<string> record;
+    int res = 0;
+    for (int left = 0; left < n; ++left) {
+        for (int right = left + 1; right < n; ++right) {
+            char x = 0;
+            int votes = 0;
+            int cnt = 0;
+            for (int i = left; i <= right; ++i) {
+                if (votes == 0) {
+                    x = str[i];
+                }
+                votes += str[i] == x ? 1 : -1;
+            }
+
+            for (int i = left; i <= right; ++i) {
+                if (str[i] == x) {
+                    ++cnt;
+                }
+            }
+
+            if (cnt > (right - left + 1) / 2) {
+                ++res;
+            }
+        }
+    }
+    cout << res+n << endl;
+
+    return 0;
+}
+
+
+
+
+
 int get_cnt(char a, char b, char c, char target) {
     int cnt = 0;
     if (a == 'x' || b == 'x' || c == 'x') {
@@ -26,7 +67,7 @@ int get_cnt(char a, char b, char c, char target) {
     return cnt;
 }
 
-int main()
+int third()
 {
     int n;
     cin >> n;
