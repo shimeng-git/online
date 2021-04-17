@@ -9,45 +9,47 @@
 #include <sstream>
 using namespace std;
 
+class Empty {
+public:
 
+    virtual void a() {}
+    virtual void b() {}
+    void c() {}
+};
+
+class Person {
+public:
+    int x;
+    void show() {
+        cout << "123" << endl;
+    }
+
+    void showX() {
+        cout << (int)x << endl;
+    }
+
+    void showAddress() {
+        cout << (int)&x << endl;
+    }
+};
 
 int main()
 {
-    set<int> data;
-    string temp;
-    bool flag = false;
-    int target = 0;
-    while (cin >> temp) {
-        if (flag) {
-            target = stoi(temp);
-            break;
-        }
 
-        if (temp != "#") {
-            data.insert(stoi(temp));
-        } else {
-            flag = true;
-        }
-    }
-
-    set<pair<int, int>> res;
-    for (int item : data) {
-        if (data.find(target - item) != data.end()) {
-            res.insert({min(item, target - item), max(item, target-item)});
-        }
-    }
-
-    if (res.empty()) {
-        cout << "NULL" << endl;
-    } else {
-        cout << "(" << res.begin()->first << "," << res.begin()->second << ")";
-        for (auto it = ++res.begin(); it != res.end(); ++it) {
-            cout << ",(" << it->first << "," << it->second << ")";
-        }
-    }
+    cout << sizeof(Empty) << endl;
 
     return 0;
 }
+
+//int main() {
+//    Person *p = nullptr;
+//    p->show();
+//    p->showX();
+//    p->showAddress();
+//
+//    return 0;
+//}
+
 
 
 //2 3
